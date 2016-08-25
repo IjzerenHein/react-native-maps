@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import MapMarker from './MapMarker';
 import MapPolyline from './MapPolyline';
+import MapGradientPolyline from './MapGradientPolyline';
 import MapPolygon from './MapPolygon';
 import MapCircle from './MapCircle';
 import MapCallout from './MapCallout';
@@ -564,6 +565,7 @@ const AIRMapLite = NativeModules.UIManager.AIRMapLite &&
 
 MapView.Marker = MapMarker;
 MapView.Polyline = MapPolyline;
+MapView.GradientPolyline = GradientPolyline;
 MapView.Polygon = MapPolygon;
 MapView.Circle = MapCircle;
 MapView.UrlTile = MapUrlTile;

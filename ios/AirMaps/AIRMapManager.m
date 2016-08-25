@@ -21,6 +21,7 @@
 #import "RCTViewManager.h"
 #import "RCTConvert.h"
 #import "AIRMapPolyline.h"
+#import "AIRMapGradientPolyline.h"
 #import "AIRMapPolygon.h"
 #import "AIRMapCircle.h"
 #import "SMCalloutView.h"
@@ -371,6 +372,8 @@ RCT_EXPORT_METHOD(takeSnapshot:(nonnull NSNumber *)reactTag
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
     if ([overlay isKindOfClass:[AIRMapPolyline class]]) {
         return ((AIRMapPolyline *)overlay).renderer;
+    } else if ([overlay isKindOfClass:[AIRMapGradientPolyline class]]) {
+        return ((AIRMapGradientPolyline *)overlay).renderer;
     } else if ([overlay isKindOfClass:[AIRMapPolygon class]]) {
         return ((AIRMapPolygon *)overlay).renderer;
     } else if ([overlay isKindOfClass:[AIRMapCircle class]]) {
