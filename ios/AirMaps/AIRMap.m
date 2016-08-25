@@ -13,6 +13,7 @@
 #import "AIRMapMarker.h"
 #import "UIView+React.h"
 #import "AIRMapPolyline.h"
+#import "AIRMapGradientPolyline.h"
 #import "AIRMapPolygon.h"
 #import "AIRMapCircle.h"
 #import <QuartzCore/QuartzCore.h>
@@ -95,6 +96,9 @@ const CGFloat AIRMapZoomBoundBuffer = 0.01;
     } else if ([subview isKindOfClass:[AIRMapPolyline class]]) {
         ((AIRMapPolyline *)subview).map = self;
         [self addOverlay:(id<MKOverlay>)subview];
+    } else if ([subview isKindOfClass:[AIRMapGradientPolyline class]]) {
+        ((AIRMapGradientPolyline *)subview).map = self;
+        [self addOverlay:(id<MKOverlay>)subview];
     } else if ([subview isKindOfClass:[AIRMapPolygon class]]) {
         ((AIRMapPolygon *)subview).map = self;
         [self addOverlay:(id<MKOverlay>)subview];
@@ -110,6 +114,8 @@ const CGFloat AIRMapZoomBoundBuffer = 0.01;
     if ([subview isKindOfClass:[AIRMapMarker class]]) {
         [self removeAnnotation:(id<MKAnnotation>)subview];
     } else if ([subview isKindOfClass:[AIRMapPolyline class]]) {
+        [self removeOverlay:(id <MKOverlay>) subview];
+    } else if ([subview isKindOfClass:[AIRMapGradientPolyline class]]) {
         [self removeOverlay:(id <MKOverlay>) subview];
     } else if ([subview isKindOfClass:[AIRMapPolygon class]]) {
         [self removeOverlay:(id <MKOverlay>) subview];

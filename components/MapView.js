@@ -19,6 +19,7 @@ var {
 
 var MapMarker = require('./MapMarker');
 var MapPolyline = require('./MapPolyline');
+var MapGradientPolyline = require('./MapGradientPolyline');
 var MapPolygon = require('./MapPolygon');
 var MapCircle = require('./MapCircle');
 var MapCallout = require('./MapCallout');
@@ -473,7 +474,8 @@ var AIRMap = requireNativeComponent('AIRMap', MapView, {
 });
 
 MapView.Marker = MapMarker;
-MapView.Polyline = MapPolyline;
+MapView.Polyline = MapPolyline
+MapView.GradientPolyline = MapGradientPolyline;
 MapView.Polygon = MapPolygon;
 MapView.Circle = MapCircle;
 MapView.Callout = MapCallout;
