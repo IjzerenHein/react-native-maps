@@ -22,6 +22,9 @@
 		1125B2E61C4AD3DA007D0023 /* AIRMapPolylineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1125B2D61C4AD3DA007D0023 /* AIRMapPolylineManager.m */; };
 		1125B2E71C4AD3DA007D0023 /* RCTConvert+MoreMapKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1125B2D91C4AD3DA007D0023 /* RCTConvert+MoreMapKit.m */; };
 		1125B2F21C4AD445007D0023 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1125B2F11C4AD445007D0023 /* SMCalloutView.m */; };
+		21D4B45A1D705B4C00DB343E /* AIRMapImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D4B4551D705B4C00DB343E /* AIRMapImage.m */; };
+		21D4B45B1D705B4C00DB343E /* AIRMapImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D4B4571D705B4C00DB343E /* AIRMapImageManager.m */; };
+		21D4B45C1D705B4C00DB343E /* AIRMapImageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D4B4591D705B4C00DB343E /* AIRMapImageRenderer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -68,6 +71,12 @@
 		1125B2F01C4AD445007D0023 /* SMCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMCalloutView.h; path = AirMaps/Callout/SMCalloutView.h; sourceTree = SOURCE_ROOT; };
 		1125B2F11C4AD445007D0023 /* SMCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMCalloutView.m; path = AirMaps/Callout/SMCalloutView.m; sourceTree = SOURCE_ROOT; };
 		11FA5C511C4A1296003AC2EE /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirMaps.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		21D4B4541D705B4C00DB343E /* AIRMapImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapImage.h; sourceTree = "<group>"; };
+		21D4B4551D705B4C00DB343E /* AIRMapImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapImage.m; sourceTree = "<group>"; };
+		21D4B4561D705B4C00DB343E /* AIRMapImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapImageManager.h; sourceTree = "<group>"; };
+		21D4B4571D705B4C00DB343E /* AIRMapImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapImageManager.m; sourceTree = "<group>"; };
+		21D4B4581D705B4C00DB343E /* AIRMapImageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapImageRenderer.h; sourceTree = "<group>"; };
+		21D4B4591D705B4C00DB343E /* AIRMapImageRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapImageRenderer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +121,12 @@
 				1125B2C61C4AD3DA007D0023 /* AIRMapCircleManager.m */,
 				1125B2C71C4AD3DA007D0023 /* AIRMapCoordinate.h */,
 				1125B2C81C4AD3DA007D0023 /* AIRMapCoordinate.m */,
+				21D4B4541D705B4C00DB343E /* AIRMapImage.h */,
+				21D4B4551D705B4C00DB343E /* AIRMapImage.m */,
+				21D4B4561D705B4C00DB343E /* AIRMapImageManager.h */,
+				21D4B4571D705B4C00DB343E /* AIRMapImageManager.m */,
+				21D4B4581D705B4C00DB343E /* AIRMapImageRenderer.h */,
+				21D4B4591D705B4C00DB343E /* AIRMapImageRenderer.m */,
 				1125B2C91C4AD3DA007D0023 /* AIRMapManager.h */,
 				1125B2CA1C4AD3DA007D0023 /* AIRMapManager.m */,
 				1125B2CB1C4AD3DA007D0023 /* AIRMapMarker.h */,
@@ -194,7 +209,10 @@
 				1125B2E41C4AD3DA007D0023 /* AIRMapPolygonManager.m in Sources */,
 				1125B2DB1C4AD3DA007D0023 /* AIRMapCallout.m in Sources */,
 				1125B2E01C4AD3DA007D0023 /* AIRMapManager.m in Sources */,
+				21D4B45C1D705B4C00DB343E /* AIRMapImageRenderer.m in Sources */,
 				1125B2E61C4AD3DA007D0023 /* AIRMapPolylineManager.m in Sources */,
+				21D4B45A1D705B4C00DB343E /* AIRMapImage.m in Sources */,
+				21D4B45B1D705B4C00DB343E /* AIRMapImageManager.m in Sources */,
 				1125B2DD1C4AD3DA007D0023 /* AIRMapCircle.m in Sources */,
 				1125B2E51C4AD3DA007D0023 /* AIRMapPolyline.m in Sources */,
 				1125B2DA1C4AD3DA007D0023 /* AIRMap.m in Sources */,

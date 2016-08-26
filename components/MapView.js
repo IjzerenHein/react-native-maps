@@ -21,6 +21,7 @@ var MapMarker = require('./MapMarker');
 var MapPolyline = require('./MapPolyline');
 var MapPolygon = require('./MapPolygon');
 var MapCircle = require('./MapCircle');
+var MapImage = require('./MapImage');
 var MapCallout = require('./MapCallout');
 
 var MapView = React.createClass({
@@ -476,6 +477,7 @@ MapView.Marker = MapMarker;
 MapView.Polyline = MapPolyline;
 MapView.Polygon = MapPolygon;
 MapView.Circle = MapCircle;
+MapView.Image = MapImage;
 MapView.Callout = MapCallout;
 
 MapView.Animated = Animated.createAnimatedComponent(MapView);

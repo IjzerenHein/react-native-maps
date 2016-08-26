@@ -23,6 +23,7 @@
 #import "AIRMapPolyline.h"
 #import "AIRMapPolygon.h"
 #import "AIRMapCircle.h"
+#import "AIRMapImage.h"
 #import "SMCalloutView.h"
 
 #import <MapKit/MapKit.h>
@@ -342,6 +343,8 @@ RCT_EXPORT_METHOD(takeSnapshot:(nonnull NSNumber *)reactTag
         return ((AIRMapPolygon *)overlay).renderer;
     } else if ([overlay isKindOfClass:[AIRMapCircle class]]) {
         return ((AIRMapCircle *)overlay).renderer;
+    } else if ([overlay isKindOfClass:[AIRMapImage class]]) {
+        return ((AIRMapImage *)overlay).renderer;
     } else {
         return nil;
     }
