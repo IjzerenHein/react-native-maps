@@ -9,15 +9,21 @@
 #import "AIRMapGradientPolylineRenderer.h"
 #import <pthread.h>
 
-/*#define V_MAX 5.0
-#define V_MIN 2.0
-#define H_MAX 0.3
-#define H_MIN 0.03*/
+
+@interface AIRMapGradientPolylineRendererSegment : NSObject
+@property UIColor *color;
+@property CGPathRef path;
+@end
+@implementation AIRMapGradientPolylineRendererSegment
+@synthesize color;
+@synthesize path;
+@end
+
 
 @implementation AIRMapGradientPolylineRenderer {
-    //float* hues;
-    pthread_rwlock_t rwLock;
+    NSMutableArray* segments;
     MKPolyline* polyline;
+    NSArray<UIColor *> *_strokeColors;
 }
 
 @synthesize strokeColors;
@@ -26,37 +32,82 @@
 {
     self = [super initWithOverlay:overlay];
     if (self){
-        pthread_rwlock_init(&rwLock,NULL);
         polyline = polyline1;
-        //float *velocity = polyline.velocity;
-        //int count = (int)polyline.pointCount;
-        //[self velocity:velocity ToHue:&hues count:count];
         [self createPath];
+        [self createSegments];
     }
     return self;
 }
 
-/**
- *  Convert velocity to Hue using specific formular.
- *
- *  H(v) = Hmax, (v > Vmax)
- *       = Hmin + ((v-Vmin)*(Hmax-Hmin))/(Vmax-Vmin), (Vmin <= v <= Vmax)
- *       = Hmin, (v < Vmin)
- *
- *  @param velocity Velocity list.
- *  @param count    count of velocity list.
- *
- *  @return An array of hues mapping each velocity.
- */
-/*-(void) velocity:(float*)velocity ToHue:(float**)_hue count:(int)count{
-    *_hue = malloc(sizeof(float)*count);
-    for (int i=0;i<count;i++){
-        float curVelo = velocity[i];
-        curVelo = ((curVelo < V_MIN) ? V_MIN : (curVelo  > V_MAX) ? V_MAX : curVelo);
-        (*_hue)[i] = H_MIN + ((curVelo-V_MIN)*(H_MAX-H_MIN))/(V_MAX-V_MIN);
+-(void) createPath{
+    CGMutablePathRef path = CGPathCreateMutable();
+    BOOL first = YES;
+    for (NSUInteger i = 0, n = polyline.pointCount; i < n; i++){
+        CGPoint point = [self pointForMapPoint:polyline.points[i]];
+        if (first) {
+            CGPathMoveToPoint(path, nil, point.x, point.y);
+            first = NO;
+        } else {
+            CGPathAddLineToPoint(path, nil, point.x, point.y);
+        }
     }
-}*/
+    self.path = path;
+}
 
+-(void) createSegments {
+    segments = [NSMutableArray new];
+    if (_strokeColors == nil) return;
+    AIRMapGradientPolylineRendererSegment* segment = nil;
+    for (NSUInteger i = 0, n = polyline.pointCount; i < n; i++){
+        CGPoint point = [self pointForMapPoint:polyline.points[i]];
+        UIColor* color = _strokeColors[i];
+        if ((segment == nil) || ![segment.color isEqual:color]) {
+            if (segment != nil) {
+                CGPathAddLineToPoint(segment.path, nil, point.x, point.y);
+            }
+            segment = [AIRMapGradientPolylineRendererSegment new];
+            segment.path = CGPathCreateMutable();
+            segment.color = color;
+            [segments addObject:segment];
+            CGPathMoveToPoint(segment.path, nil, point.x, point.y);
+        } else {
+            CGPathAddLineToPoint(segment.path, nil, point.x, point.y);
+        }
+    }
+}
+
+- (void)setStrokeColors:(NSArray<UIColor *> *)strokeColors {
+    _strokeColors = strokeColors;
+    [self createSegments];
+}
+
+-(void) drawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale inContext:(CGContextRef)context
+{    
+    CGRect pointsRect = CGPathGetBoundingBox(self.path);
+    CGRect mapRectCG = [self rectForMapRect:mapRect];
+    if (!CGRectIntersectsRect(pointsRect, mapRectCG))return;
+
+    CGContextSetLineWidth(context, self.lineWidth / zoomScale);
+    CGContextSetLineCap(context, self.lineCap);
+    CGContextSetLineJoin(context, self.lineJoin);
+    CGContextSetMiterLimit(context, self.miterLimit);
+    CGFloat dashes[self.lineDashPattern.count];
+    for (NSUInteger i = 0; i < self.lineDashPattern.count; i++) {
+        dashes[i] = self.lineDashPattern[i].floatValue;
+    }
+    CGContextSetLineDash(context, self.lineDashPhase, dashes, self.lineDashPattern.count);
+
+    for (NSUInteger i = 0, n = segments.count; i < n; i++) {
+        AIRMapGradientPolylineRendererSegment* segment = segments[i];
+        CGContextSaveGState(context);
+        CGContextAddPath(context, segment.path);
+        CGContextSetStrokeColorWithColor(context, segment.color.CGColor);
+        CGContextStrokePath(context);
+        CGContextRestoreGState(context);
+    }
+}
+
+/*
 -(void) createPath{
     CGMutablePathRef path = CGPathCreateMutable();
     BOOL pathIsEmpty = YES;
@@ -73,7 +124,7 @@
     pthread_rwlock_wrlock(&rwLock);
     self.path = path; //<—— don't forget this line.
     pthread_rwlock_unlock(&rwLock);
-}
+}*/
 
 //-(BOOL)canDrawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale{
 //    CGRect pointsRect = CGPathGetBoundingBox(self.path);
@@ -82,7 +133,7 @@
 //}
 
 
--(void) drawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale inContext:(CGContextRef)context
+/*-(void) drawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale inContext:(CGContextRef)context
 {    
     CGRect pointsRect = CGPathGetBoundingBox(self.path);
     CGRect mapRectCG = [self rectForMapRect:mapRect];
@@ -127,6 +178,7 @@
         }
         pcolor = [UIColor colorWithCGColor:ccolor.CGColor];
     }
+}*/
 
-}
+
 @end
