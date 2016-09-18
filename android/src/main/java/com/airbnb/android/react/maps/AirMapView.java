@@ -390,6 +390,10 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
             AirMapPolyline polylineView = (AirMapPolyline) child;
             polylineView.addToMap(map);
             features.add(index, polylineView);
+        } else if (child instanceof AirMapGradientPolyline) {
+            AirMapGradientPolyline polylineView = (AirMapGradientPolyline) child;
+            polylineView.addToMap(map);
+            features.add(index, polylineView);
         } else if (child instanceof AirMapPolygon) {
             AirMapPolygon polygonView = (AirMapPolygon) child;
             polygonView.addToMap(map);

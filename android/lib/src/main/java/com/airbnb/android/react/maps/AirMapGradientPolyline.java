@@ -18,7 +18,7 @@ public class AirMapGradientPolyline extends AirMapFeature {
     private Polyline polyline;
 
     private List<LatLng> coordinates;
-    private List<int> colors;
+    private int[] colors;
     private float width;
     private boolean geodesic;
     private float zIndex;
@@ -40,16 +40,16 @@ public class AirMapGradientPolyline extends AirMapFeature {
     }
 
     public void setColors(ReadableArray colors) {
-        this.colors = new ArrayList<>(colors.size());
+        this.colors = new int[colors.size()];
         for (int i = 0; i < colors.size(); i++) {
             int color = colors.getInt(i);
-            this.colors.add(i, color);
+            this.colors[i] = color;
         }
 
-        /*this.color = color;
-        if (polyline != null) {
-            polyline.setColor(color);
-        }*/
+        //this.color = color;
+        if ((polyline != null) && (colors.size() > 0)) {
+            polyline.setColor(colors.getInt(0));
+        }
     }
 
     public void setWidth(float width) {
@@ -83,7 +83,7 @@ public class AirMapGradientPolyline extends AirMapFeature {
     private PolylineOptions createPolylineOptions() {
         PolylineOptions options = new PolylineOptions();
         options.addAll(coordinates);
-        //options.color(color);
+        if (this.colors.length > 0) options.color(this.colors[0]);
         options.width(width);
         options.geodesic(geodesic);
         options.zIndex(zIndex);
