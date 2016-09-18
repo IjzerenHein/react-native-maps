@@ -77,6 +77,7 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
     private final List<AirMapFeature> features = new ArrayList<>();
     private final Map<Marker, AirMapMarker> markerMap = new HashMap<>();
     private final Map<Polyline, AirMapPolyline> polylineMap = new HashMap<>();
+    private final Map<Polyline, AirMapGradientPolyline> gradientPolylineMap = new HashMap<>();
     private final Map<Polygon, AirMapPolygon> polygonMap = new HashMap<>();
     private final Map<Circle, AirMapCircle> circleMap = new HashMap<>();
 
@@ -406,6 +407,12 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
             features.add(index, polylineView);
             Polyline polyline = (Polyline) polylineView.getFeature();
             polylineMap.put(polyline, polylineView);
+        } else if (child instanceof AirMapGradientPolyline) {
+            AirMapGradientPolyline polylineView = (AirMapGradientPolyline) child;
+            polylineView.addToMap(map);
+            features.add(index, polylineView);
+            Polyline polyline = (Polyline) polylineView.getFeature();
+            gradientPolylineMap.put(polyline, polylineView);
         } else if (child instanceof AirMapPolygon) {
             AirMapPolygon polygonView = (AirMapPolygon) child;
             polygonView.addToMap(map);
@@ -439,6 +446,8 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
             markerMap.remove(feature.getFeature());
         } else if (feature instanceof AirMapPolyline) {
             polylineMap.remove(feature.getFeature());
+        } else if (feature instanceof AirMapGradientPolyline) {
+            gradientPolylineMap.remove(feature.getFeature());
         } else if (feature instanceof AirMapPolygon) {
             polygonMap.remove(feature.getFeature());
         } else if (feature instanceof AirMapCircle) {
