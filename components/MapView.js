@@ -565,7 +565,7 @@ const AIRMapLite = NativeModules.UIManager.AIRMapLite &&
 
 MapView.Marker = MapMarker;
 MapView.Polyline = MapPolyline;
-MapView.GradientPolyline = GradientPolyline;
+MapView.GradientPolyline = MapGradientPolyline;
 MapView.Polygon = MapPolygon;
 MapView.Circle = MapCircle;
 MapView.UrlTile = MapUrlTile;
