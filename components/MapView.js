@@ -505,7 +505,7 @@ const AIRMapLite = requireNativeComponent('AIRMapLite', MapView, {
 
 MapView.Marker = MapMarker;
 MapView.Polyline = MapPolyline;
-MapView.GradientPolyline = GradientPolyline;
+MapView.GradientPolyline = MapGradientPolyline;
 MapView.Polygon = MapPolygon;
 MapView.Circle = MapCircle;
 MapView.Callout = MapCallout;
