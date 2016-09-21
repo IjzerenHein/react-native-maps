@@ -74,6 +74,7 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
     private final AirMapManager manager;
     private LifecycleEventListener lifecycleListener;
     private boolean paused = false;
+    private boolean destroyed = false;
     private final ThemedReactContext context;
     private final EventDispatcher eventDispatcher;
 
@@ -269,7 +270,10 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
         if (!paused) {
             onPause();
         }
-        onDestroy();
+        if (!destroyed) {
+            destroyed = true;
+            onDestroy();
+        }
     }
 
     public void setRegion(ReadableMap region) {
