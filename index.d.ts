@@ -3,7 +3,7 @@ import * as React from 'react';
 declare module "react-native-maps" {
 
     export type ProviderType = 'google';
-    export type MapType = 'standard' | 'satellite' | 'hybrid' | 'terrain' | 'none';
+    export type MapType = 'standard' | 'satellite' | 'hybrid' | 'terrain' | 'none' | 'mutedStandard';
     export type LineCapType = 'butt' | 'round' | 'square';
     export type LineJoinType = 'miter' | 'round' | 'bevel';
 
