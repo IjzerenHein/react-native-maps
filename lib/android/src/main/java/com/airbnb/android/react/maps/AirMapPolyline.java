@@ -19,6 +19,7 @@ public class AirMapPolyline extends AirMapFeature {
 
   private List<LatLng> coordinates;
   private int color;
+  private int[] colors;
   private float width;
   private boolean geodesic;
   private float zIndex;
@@ -43,6 +44,17 @@ public class AirMapPolyline extends AirMapFeature {
     this.color = color;
     if (polyline != null) {
       polyline.setColor(color);
+    }
+  }
+
+  public void setColors(ReadableArray colors) {
+    this.colors = new int[colors.size()];
+    for (int i = 0; i < colors.size(); i++) {
+      int color = colors.getInt(i);
+      this.colors[i] = color;
+    }
+    if ((polyline != null) && (colors.size() > 0)) {
+      polyline.setColor(colors.getInt(0));
     }
   }
 
@@ -78,6 +90,7 @@ public class AirMapPolyline extends AirMapFeature {
     PolylineOptions options = new PolylineOptions();
     options.addAll(coordinates);
     options.color(color);
+    // if (this.colors.length > 0) options.color(this.colors[0]);
     options.width(width);
     options.geodesic(geodesic);
     options.zIndex(zIndex);
